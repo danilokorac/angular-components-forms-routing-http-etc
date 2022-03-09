@@ -1,0 +1,56 @@
+<!--<div [hidden]="submited">
+  <p>{{model | json}}</p>
+  <form #petForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name </label>
+      <input type="text" id="name" required [(ngModel)]="model.name" name="name">
+    </div>
+    <div>
+      <label for="specie">Specie </label>
+      <select id="specie" required [(ngModel)]="model.specie" name="specie">
+        <option *ngFor="let specie of species" [value]="specie">{{specie}}</option>
+      </select>
+    </div>
+    <button [disabled]="!petForm.form.valid" type="submit">Submit</button>
+  </form>
+</div>
+<div [hidden]="!submited">
+  <h2>You submited:</h2>
+  <p>Name: {{model.name}}</p>
+  <p>Specie: {{model.specie}}</p>
+  <button (click)="submited = false">Edit</button>
+</div>
+<label for="name">Name:</label>
+<input id="name" type="text" [formControl]="name">
+<p>Value: {{name.value}}</p>
+<p>
+  <button (click)="updateName()">Update name</button>
+</p>
+
+<form [formGroup]="profileForm" (ngSubmit) = "onSubmit()">
+  <label for="first-name">First name:</label>
+  <input id="first-name" type="text" formControlName="firstName">
+  <label for="last-name"> Last name:</label>
+  <input id="last-name" type="text" formControlName="lastName">
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<form [formGroup]="validationForm">
+  <input 
+    type="text" 
+    name="name" 
+    required 
+    minlength="4" 
+    formControlName="name"
+    />
+    <div *ngIf="name!.invalid && (name!.dirty || name!.touched)">
+      <div *ngIf="name!.errors?.['required']">
+        Name is required.
+      </div>
+      <div *ngIf="name!.errors?.['minlength']">
+        Name must be at least 4 characters long.
+      </div>
+    </div>
+</form>
+
+
